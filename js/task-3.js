@@ -1,31 +1,35 @@
+class StringBuilder {
+    #value;
 
-class Storage {
-  #items
-    constructor({ items }) {
-      this.#items = items;
+    constructor({ initialValue }) {
+        this.#value = initialValue; 
     }
-    getItems() {
-      return this.#items;
-    }
-    addItem(newItem) {
-      this.#items.push(newItem);
-      return this.#items
-    }
-    removeItem(itemToRemove) {
-        const index = this.#items.indexOf(itemToRemove);
-        if (index !== -1) {
-          this.#items.splice(index, 1);
-          return true; 
-        }
-        return false; 
-      }
-  }
-  
-  const storage = new Storage({ items: ["Nanitoids", "Prolonger", "Antigravitator"] });
 
-  console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
-  storage.addItem("Droid");
-  console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
-  storage.removeItem("Prolonger");
-  console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
-  
+    getValue() {
+        return this.#value;
+    }
+
+    padEnd(str) {
+        this.#value += str; 
+        return this.#value;
+    }
+
+    padStart(str) {
+        this.#value = str + this.#value; 
+        return this.#value;
+    }
+
+    padBoth(str) {
+        this.#value = str + this.#value + str; 
+        return this.#value;
+    }
+}
+
+const builder = new StringBuilder({ initialValue: "." });
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
